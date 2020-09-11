@@ -4,16 +4,73 @@
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body>
+  <style>
+    html, body {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {        
+      justify-content: center;
+    }
+    .hero, body {
+      
+      align-items: center;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    label {
+      font-size: 36px;
+      text-transform: uppercase;
+      padding: 24px 0 12px 0;
+    }
+    
+    button {
+      margin-top: 48px;
+    }
+    
+    button, input {
+      font-size: 24px;
+      text-transform: uppercase;
+      padding: 12px 12px 12px 12px;
+    }
+  </style>
+  <body class="column">
+    
+    <span class="hero">
+      <span class="column">
+        <label>email</label>
+        <input type="email" name="" value="">
+        <label>password</label>
+        <input type="password" name="" value="">
+        
+        <button type="button" name="button">signin</button>
+      </span>
+    </span>
     <script type="module">
       import client from './dist/client.js';
-      
+      let connection;
       (async () => {
-        const connection = await client()
         
-        const user = await connection.login()
+        document.querySelector('button').addEventListener('click', async () => {
+          if (!connection) connection = await client()
+          const user = document.querySelector('input[type="email"]')
+          const password = document.querySelector('input[type="password"]')
+          const result = await connection.login({user, password})
+          
+          console.log(JSON.parse(result));
+        })
         
-        console.log(JSON.parse(user));
+        
       })()
     </script>
   </body>
