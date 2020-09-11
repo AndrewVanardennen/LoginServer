@@ -1,0 +1,35 @@
+{
+  "name": "LoginServer",
+  "version": "1.0.0",
+  "description": "Encrypted login server via https/wss",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "c": "rollup -c",
+    "serve:server": "node dist/server.js",
+    "serve:client": "node dist/client-server.js",
+    "serve:demo": "jsproject --serve ./",
+    "serve": "npm-run-parallel serve:server serve:client serve:demo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewVanardennen/LoginServer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndrewVanardennen/LoginServer/issues"
+  },
+  "homepage": "https://github.com/AndrewVanardennen/LoginServer#readme",
+  "dependencies": {
+    "crypto-ecdh": "^1.0.0",
+    "socket-request-client": "^1.4.4",
+    "socket-request-server": "^1.1.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "rollup": "^2.26.11"
+  }
+}

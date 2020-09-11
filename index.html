@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="module">
+      import client from './dist/client.js';
+      
+      (async () => {
+        const connection = await client()
+        
+        const user = await connection.login()
+        
+        console.log(JSON.parse(user));
+      })()
+    </script>
+  </body>
+</html>
