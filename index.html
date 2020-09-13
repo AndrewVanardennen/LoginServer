@@ -67,7 +67,7 @@
           const result = await connection.login({user, password})
 
           const c0 = await connection.card({value: 0})
-          console.log(c0);
+          console.log(JSON.parse(c0));
 
           console.log(JSON.parse(result));
         }

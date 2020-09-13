@@ -23,10 +23,9 @@ export default (async () => {
     },
     card: async (params, response) => {
       const pair = users[params.public]
-      const result = await pair.decypt(params.value)
+      const result = await pair.decrypt(params.value)
 
-      console.log( result);
-      const enc = await pair.encrypt(cards[result])
+      const enc = await pair.encrypt(JSON.stringify(cards[Number(result)]))
 
       response.send(enc.toString())
     }

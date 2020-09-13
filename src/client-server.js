@@ -37,8 +37,9 @@ export default (async () => {
       response.send(user)
     },
     card: async (params, response) => {
-      let value = await pair.encrypt(params.value)
-
+      let value = await pair.encrypt(String(params.value))
+      value = value.toString()
+      
       let card = await connection.request({
         url: 'card',
         params: {
