@@ -4,11 +4,11 @@ import ecdh from 'crypto-ecdh';
 
 export default (async () => {
   const users = {}
-  
-  const pair = ecdh()  
+
+  const pair = ecdh()
   const connection = await client('ws://localhost:5555', 'login')
-  
-  
+
+
   const shake = await connection.request({
     url: 'handshake',
     params: {
@@ -17,14 +17,14 @@ export default (async () => {
   })
   console.log(shake);
   pair.derive(shake)
-  
+
   console.log('secure connection established');
-  
+
   return server({ port: 4444, protocol: 'login' }, {
     login: async (params, response) => {
-      let value = await pair.encrypt(JSON.stringify({ user: params.user, password: params.password }))      
+      let value = await pair.encrypt(JSON.stringify({ user: params.user, password: params.password }))
       value = value.toString()
-      
+
       let user = await connection.request({
         url: 'login',
         params: {
@@ -33,8 +33,22 @@ export default (async () => {
         }
       })
       user = await pair.decrypt(user)
-      
+
       response.send(user)
+    },
+    card: async (params, response) => {
+      let value = await pair.encrypt(params.value)
+
+      let card = await connection.request({
+        url: 'card',
+        params: {
+          public: pair.public,
+          value
+        }
+      })
+      card = await pair.decrypt(card)
+
+      response.send(card)
     }
   })
 })()

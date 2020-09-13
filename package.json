@@ -24,6 +24,7 @@
   "homepage": "https://github.com/AndrewVanardennen/LoginServer#readme",
   "dependencies": {
     "crypto-ecdh": "^1.0.0",
+    "npm-run-parallel": "^0.6.0",
     "socket-request-client": "^1.4.4",
     "socket-request-server": "^1.1.2"
   },

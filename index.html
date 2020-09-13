@@ -16,28 +16,28 @@
       box-sizing: border-box;
       font-family: 'Roboto', sans-serif;
     }
-    body {        
+    body {
       justify-content: center;
     }
     .hero, body {
-      
+
       align-items: center;
     }
     .column {
       display: flex;
       flex-direction: column;
     }
-    
+
     label {
       font-size: 36px;
       text-transform: uppercase;
       padding: 24px 0 12px 0;
     }
-    
+
     button {
       margin-top: 48px;
     }
-    
+
     button, input {
       font-size: 24px;
       text-transform: uppercase;
@@ -45,14 +45,14 @@
     }
   </style>
   <body class="column">
-    
+
     <span class="hero">
       <span class="column">
         <label>email</label>
         <input type="email" name="" value="">
         <label>password</label>
         <input type="password" name="" value="">
-        
+
         <button type="button" name="button">signin</button>
       </span>
     </span>
@@ -60,17 +60,21 @@
       import client from './dist/client.js';
       let connection;
       (async () => {
-        
-        document.querySelector('button').addEventListener('click', async () => {
+        const click = async () => {
           if (!connection) connection = await client()
-          const user = document.querySelector('input[type="email"]')
-          const password = document.querySelector('input[type="password"]')
+          const user = document.querySelector('input[type="email"]').value
+          const password = document.querySelector('input[type="password"]').value
           const result = await connection.login({user, password})
-          
+
+          const c0 = await connection.card({value: 0})
+          console.log(c0);
+
           console.log(JSON.parse(result));
+        }
+        document.querySelector('button').addEventListener('click', click)
+        document.addEventListener('keyup', event => {
+          if(event.key === 'Enter') document.querySelector('button').click();
         })
-        
-        
       })()
     </script>
   </body>
